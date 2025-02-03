@@ -1,0 +1,14 @@
+<div id="popup-modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div class="bg-white p-4 rounded shadow-lg w-96 relative"> <!-- Ajout de w-96 pour une largeur fixe -->
+        <div class="header-modal h-0">
+            <h2 class="text-xl font-bold mb-4">Information</h2>
+        </div>
+        <div class="body-modal flex flex-col items-center justify-center h-40">
+            <p>Veuillez composer le numéro sur votre téléphone</p>
+            <p>Le code pro de <span id="specialist-name" class="font-bold uppercase"></span> est le <span class="font-bold uppercase" id="specialist-code"></span> , il vous sera demandé lors de l'appel.</p>
+        </div>
+        <div class="footer-body">
+            <button id="close-popup" class="absolute bottom-4 right-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Fermer</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  test-technique-db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_technique
+      MYSQL_USER: mathieu
+      MYSQL_PASSWORD: 123456
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - test_technique_symfony_network
+
+  test-technique-php:
+    build:
+      context: ./docker/php
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - test_technique_symfony_network
+    depends_on:
+      - test-technique-db
+
+  test-technique-nginx:
+    image: nginx:alpine
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8000:8000"
+    networks:
+      - test_technique_symfony_network
+    depends_on:
+      - test-technique-php
+
+  test-technique-adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - test_technique_symfony_network
+    depends_on:
+      - test-technique-db
+
+volumes:
+  db_data:
+
+networks:
+  test_technique_symfony_network:

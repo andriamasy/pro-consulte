@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+@layer utilities {
+    .h-screen-minus-72 {
+        height: calc(100vh - 108px);
+    }
+}

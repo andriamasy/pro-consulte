@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Pros Consulte!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="{{ path('psychologists_list') }}" class="text-2xl font-bold text-gray-800">Pro consulte</a>
+
+            <!-- Navbar Links -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="text-gray-600 hover:text-gray-800">About</a>
+                <a href="#" class="text-gray-600 hover:text-gray-800">Services</a>
+                <a href="#" class="text-gray-600 hover:text-gray-800">Contact</a>
+            </nav>
+
+            <!-- Button -->
+            {% if app.user %}
+                <a href="{{ path('app_logout') }}" class="hidden md:inline-block bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">Se déconnecter</a>
+            {% else %}
+                <a href="{{path("app_login") }}" class="hidden md:inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Se connecter</a>
+            {% endif %}
+
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-gray-600 focus:outline-none" id="mobile-menu-button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden" id="mobile-menu">
+            <nav class="px-2 pt-2 pb-4 space-y-1">
+                <a href="#" class="block text-gray-600 hover:text-gray-800">About</a>
+                <a href="#" class="block text-gray-600 hover:text-gray-800">Services</a>
+                <a href="#" class="block text-gray-600 hover:text-gray-800">Contact</a>
+                <a href="{{path("app_login") }}" class="block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Se connecter</a>
+            </nav>
+        </div>
+    </header>
+    <body>
+    {% block body %}{% endblock %}
+    {% block javascripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+    {% block footer %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,37 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Nos spychologue - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-semibold text-left">Nos psychologues</h1>
+            <a href="{{ path('admin_psychologists_new') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                Ajouter
+            </a>
+        </div>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for specialist in specialists %}
+                <div class="bg-white border rounded-lg p-4 shadow-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold">{{ specialist.fullName }}</h2>
+                        <span class="text-sm {{ specialist.online ? 'text-green-500' : 'text-gray-500' }}">
+                        {{ specialist.online ? 'En ligne' : 'Hors ligne' }}
+                    </span>
+                    </div>
+                    <p class="text-gray-700">{{ specialist.email }}</p>
+                    <p class="text-sm text-gray-500">{{ specialist.city }}</p>
+                    <p class="text-gray-700 bg-dark text-white mt-3"> Code : {{ specialist.code }}</p>
+
+                    <a href="{{ path('admin_specialist_show', {'id': specialist.id}) }}" class="mt-4 inline-block text-blue-500 hover:text-blue-700">
+                        Voir le profil
+                    </a>
+                </div>
+            {% else %}
+                <p class="text-center col-span-3 text-gray-500">Aucun psychologue trouvé</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

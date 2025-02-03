@@ -1,0 +1,23 @@
+{% extends '@UI/admin/base.html.twig' %}
+
+{% block content %}
+    <div class="max-w-4xl mx-auto p-6">
+        <h1 class="text-2xl font-bold">{{ psychologist.fullName }}</h1>
+
+        <div class="mt-4 p-4 border rounded-lg shadow-md bg-white">
+            <p class="text-gray-700"><strong>Télephone :</strong> {{ psychologist.mobile }}</p>
+            <p class="text-gray-700"><strong>Localisation :</strong> {{ psychologist.city }}</p>
+            <p class="text-gray-700"><strong>Email :</strong> <a href="mailto:{{ psychologist.email }}" class="text-blue-500 hover:underline">{{ psychologist.email }}</a></p>
+            <p class="text-gray-700"><strong>Déscription :</strong> {{ psychologist.description }}</p>
+            <p class="text-gray-700"><strong>Statut :</strong>
+                {% if psychologist.online %}
+                    <span class="text-green-500">En ligne</span>
+                {% else %}
+                    <span class="text-gray-500">Hors ligne</span>
+                {% endif %}
+            </p>
+        </div>
+
+        <a href="{{ path('admin_specialist_list') }}" class="mt-4 inline-block text-blue-500 hover:underline">Retour à la liste</a>
+    </div>
+{% endblock %}
